@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- xmlns:th lets editors like IntelliJ recognize the th:* attributes. -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dance Cards</title>
+    <!-- @{...} builds a link to a file in src/main/resources/static/ -->
+    <link rel="stylesheet" th:href="@{/css/cards.css}">
+</head>
+<body>
+
+<header class="page-header">
+    <a class="back-link" th:href="@{/}">&larr; Back / Edit Names</a>
+    <h1>Dance Cards</h1>
+    <p>Press Cmd+P to print: each card goes on its own page.</p>
+</header>
+
+<main class="card-grid">
+    <!-- th:each repeats this <article> once for every card in the list. -->
+    <article class="card" th:each="card : ${cards}">
+        <header class="card-header">
+            <h2 class="dancer-name" th:text="${card.name()}">Dancer Name</h2>
+            <p class="dancer-role" th:text="${card.role()}">Role</p>
+        </header>
+
+        <table class="dances">
+            <thead>
+            <tr>
+                <th scope="col" class="col-number">#</th>
+                <th scope="col">Dance</th>
+                <th scope="col">Partner</th>
+            </tr>
+            </thead>
+
+            <!-- One <tbody> per set: a heading row, then one row per dance. -->
+            <tbody th:each="set : ${card.sets()}">
+            <tr class="set-heading">
+                <th scope="rowgroup" colspan="3" th:text="|Set ${set.setNumber()}|">Set 1</th>
+            </tr>
+            <!-- th:classappend adds the "sit-out" class only when that line is a sit-out. -->
+            <tr th:each="line : ${set.lines()}"
+                th:classappend="${line.isSitOut()} ? 'sit-out'">
+                <td class="col-number" th:text="${line.slot().danceNumber()}">1</td>
+                <td th:text="${line.slot().danceType()}">Waltz</td>
+                <td class="partner" th:text="${line.partnerText()}">Partner</td>
+            </tr>
+            </tbody>
+        </table>
+    </article>
+</main>
+
+</body>
+</html>

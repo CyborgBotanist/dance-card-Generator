@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dance Cards</title>
+    <link rel="stylesheet" th:href="@{/css/cards.css}">
+</head>
+<body>
+
+<header class="page-header">
+    <h1>Dance Cards</h1>
+    <p>Type or paste one name per line, then click Create Dance Cards.</p>
+</header>
+
+<main class="names-page">
+    <!-- Only shown when ${problems} has something in it. role="alert" makes screen readers announce it. -->
+    <div class="form-problems" role="alert" th:unless="${problems.isEmpty()}">
+        <p class="form-problems-title">Almost there! Please fix this first:</p>
+        <ul>
+            <li th:each="problem : ${problems}" th:text="${problem}">Please enter at least one lead.</li>
+        </ul>
+    </div>
+
+    <!-- th:object names the form object; *{leads} below means namesForm.leads.
+         th:field fills each box with what's in the object and names it so Spring can read it back. -->
+    <form class="names-form" method="post" th:action="@{/}" th:object="${namesForm}">
+        <div class="name-columns">
+            <div class="name-box">
+                <label for="leads">Leads</label>
+                <textarea th:field="*{leads}" rows="16" spellcheck="false" autocomplete="off"
+                          placeholder="Adam&#10;Ben&#10;Carlos"></textarea>
+            </div>
+            <div class="name-box">
+                <label for="follows">Follows</label>
+                <textarea th:field="*{follows}" rows="16" spellcheck="false" autocomplete="off"
+                          placeholder="Dana&#10;Emma&#10;Fiona"></textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="primary-button">Create Dance Cards</button>
+    </form>
+
+    <p class="save-note">
+        When you create the cards, the names are saved to
+        <code th:text="${savedFile}">~/DanceCards/dancers.json</code>
+        and filled in here next time.
+    </p>
+</main>
+
+</body>
+</html>

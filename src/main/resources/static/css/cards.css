@@ -1,0 +1,293 @@
+/* ============================================================
+   Screen layout
+   ============================================================ */
+
+body {
+    margin: 0;
+    padding: 1.5rem;
+    background: #f4f2ee;
+    color: #1a1a1a;
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.4;
+}
+
+.page-header {
+    max-width: 75rem;
+    margin: 0 auto 1.5rem;
+}
+
+.page-header h1 {
+    margin: 0 0 0.25rem;
+    font-size: 2rem;
+}
+
+.page-header p {
+    margin: 0;
+    color: #555;
+}
+
+/* The grid: as many columns as fit, each at least 17rem wide. */
+.card-grid {
+    max-width: 75rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 1rem 1.25rem 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.dancer-name {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.dancer-role {
+    margin: 0.1rem 0 0;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #555;
+}
+
+/* ---- The table of dances ---- */
+
+.dances {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.dances thead th {
+    text-align: left;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555;
+    padding: 0 0.4rem 0.3rem;
+}
+
+.dances td {
+    padding: 0.3rem 0.4rem;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.col-number {
+    width: 2rem;
+    text-align: center;
+}
+
+.set-heading th {
+    text-align: left;
+    padding: 0.7rem 0.4rem 0.2rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.partner {
+    font-weight: bold;
+}
+
+/* Sit-outs: shaded row, italic, not bold, so they stand out from real partners.
+   Uses shading and font style rather than color, so it still reads in black and white. */
+.sit-out td {
+    background: #ececec;
+    color: #555;
+}
+
+.sit-out .partner {
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+/* Link from the cards page back to the name form. Lives in .page-header, so it isn't printed. */
+.back-link {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+}
+
+
+/* ============================================================
+   Start page: the name form
+   ============================================================ */
+
+.names-page {
+    max-width: 50rem;
+    margin: 0 auto;
+}
+
+.form-problems {
+    background: #fff4e5;
+    border: 1px solid #d08a2e;
+    border-left-width: 6px;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.form-problems-title {
+    margin: 0 0 0.25rem;
+    font-weight: bold;
+}
+
+.form-problems ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+/* Leads and Follows side by side; stacked on narrow screens (see below). */
+.name-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.name-box label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.name-box textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 20rem;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: inherit;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.name-box textarea:focus {
+    outline: 3px solid #8fb3e0;
+    border-color: #4a78b5;
+}
+
+.primary-button {
+    margin-top: 1.25rem;
+    padding: 0.75rem 1.75rem;
+    border: none;
+    border-radius: 6px;
+    background: #1a1a1a;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1.15rem;
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    background: #3a3a3a;
+}
+
+.save-note {
+    margin-top: 1.5rem;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.save-note code {
+    word-break: break-all;
+}
+
+@media (max-width: 40rem) {
+    .name-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .name-box textarea {
+        min-height: 12rem;
+    }
+}
+
+
+/* ============================================================
+   Print layout (used by Cmd+P)
+   ============================================================ */
+
+@media print {
+    @page {
+        margin: 1.5cm;
+    }
+
+    body {
+        padding: 0;
+        background: #fff;
+        color: #000;
+        font-size: 14pt;
+    }
+
+    /* Hide the page title and instructions. */
+    .page-header {
+        display: none;
+    }
+
+    /* One card per page instead of a grid. */
+    .card-grid {
+        display: block;
+        max-width: none;
+    }
+
+    .card {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        break-after: page;   /* start a new page after each card */
+        break-inside: avoid; /* don't split a card across two pages */
+    }
+
+    .card:last-child {
+        break-after: auto;   /* no blank page at the end */
+    }
+
+    .dancer-name {
+        font-size: 24pt;
+    }
+
+    .card-header {
+        border-bottom-color: #000;
+    }
+
+    .dancer-role,
+    .dances thead th {
+        color: #000;
+    }
+
+    .dances td {
+        border-bottom-color: #999;
+    }
+
+    .set-heading th {
+        border-bottom-color: #000;
+    }
+
+    /* Browsers skip background shading when printing unless told otherwise.
+       Keep a light gray behind sit-outs; the italic text marks them even if it's dropped. */
+    .sit-out td {
+        background: #e6e6e6;
+        color: #000;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
