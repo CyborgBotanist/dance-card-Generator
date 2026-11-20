@@ -5,7 +5,7 @@ package com.dance.dance_card_generator.schedule;
  * Java automatically creates the constructor, the getters name() and role(),
  * and equals()/hashCode()/toString() for us.
  *
- * Usage: new Dancer("Alice", Role.LEAD)
+ * Usage: new Dancer("Adam", Role.LEAD)
  */
 public record Dancer(String name, Role role) {
 }

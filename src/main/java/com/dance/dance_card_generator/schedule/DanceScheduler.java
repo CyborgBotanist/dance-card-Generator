@@ -38,8 +38,10 @@ public class DanceScheduler {
             throw new IllegalArgumentException("Need at least one set with at least one dance.");
         }
         for (int set = 1; set <= numberOfSets; set++) {
+            int danceNumber = 1; // starts over at 1 in every set
             for (String danceType : dancesInEachSet) {
-                slots.add(new DanceSlot(set, danceType));
+                slots.add(new DanceSlot(set, danceNumber, danceType));
+                danceNumber++;
             }
         }
     }
@@ -86,13 +88,13 @@ public class DanceScheduler {
         }
 
         // Go through the evening one dance at a time.
-        for (int danceNumber = 0; danceNumber < slots.size(); danceNumber++) {
-            DanceSlot slot = slots.get(danceNumber);
+        for (int danceIndex = 0; danceIndex < slots.size(); danceIndex++) { // 0, 1, 2, ... through the whole evening
+            DanceSlot slot = slots.get(danceIndex);
 
             for (int spot = 0; spot < circleSize; spot++) {
-                // The inner circle has moved danceNumber spots to the right.
+                // The inner circle has moved danceIndex spots to the right.
                 // The % (remainder) makes the count wrap back around to 0 at the end of the circle.
-                Dancer outer = largerGroup.get((spot + danceNumber) % circleSize);
+                Dancer outer = largerGroup.get((spot + danceIndex) % circleSize);
                 Dancer inner = innerCircle.get(spot);
 
                 if (inner == null) {
@@ -114,6 +116,11 @@ public class DanceScheduler {
      *
      * Example: 3 follows in a circle of 6 gives [empty, A, empty, B, empty, C].
      */
+
+    /**
+     * I need to remember that it is almost 100% gauranteed that the smaller group will be the leads.
+     * basically, the men must not have nay empty dances.
+     * */
     private List<Dancer> buildInnerCircle(List<Dancer> smallerGroup, int circleSize) {
         List<Dancer> circle = new ArrayList<>();
         int placed = 0;

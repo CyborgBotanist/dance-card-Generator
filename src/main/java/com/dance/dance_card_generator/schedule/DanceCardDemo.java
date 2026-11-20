@@ -20,7 +20,7 @@ public class DanceCardDemo {
 
         // Example 1: equal numbers (3 leads, 3 follows)
         List<Dancer> evenGroup = List.of(
-                new Dancer("Alice", Role.LEAD),
+                new Dancer("Adam", Role.LEAD),
                 new Dancer("Ben", Role.LEAD),
                 new Dancer("Carlos", Role.LEAD),
                 new Dancer("Dana", Role.FOLLOW),
@@ -54,8 +54,9 @@ public class DanceCardDemo {
         for (CardLine line : card.getLines()) {
             // printf fills in the %s placeholders in order. "%-10s" means
             // "a string, padded with spaces to 10 characters", which lines up the columns.
-            System.out.printf("  Set %d   %-10s %s%n",
-                    line.slot().setNumber(), line.slot().danceType(), line.partnerText());
+            System.out.printf("  Set %d   Dance %d   %-10s %s%n",
+                    line.slot().setNumber(), line.slot().danceNumber(),
+                    line.slot().danceType(), line.partnerText());
         }
     }
 
