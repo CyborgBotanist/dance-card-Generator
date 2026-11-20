@@ -29,10 +29,10 @@ public class DanceCardDemo {
         );
         printEverything("EXAMPLE 1: 3 leads, 3 follows", scheduler, evenGroup);
 
-        // Example 2: unequal numbers (4 leads, 3 follows), so someone sits out each dance
+        // Example 2: unequal numbers (3 leads, 4 follows), so a follow sits out each dance
         List<Dancer> unevenGroup = new ArrayList<>(evenGroup);
-        unevenGroup.add(new Dancer("George", Role.LEAD));
-        printEverything("EXAMPLE 2: 4 leads, 3 follows", scheduler, unevenGroup);
+        unevenGroup.add(new Dancer("Grace", Role.FOLLOW));
+        printEverything("EXAMPLE 2: 3 leads, 4 follows", scheduler, unevenGroup);
     }
 
     private static void printEverything(String title, DanceScheduler scheduler, List<Dancer> dancers) {
