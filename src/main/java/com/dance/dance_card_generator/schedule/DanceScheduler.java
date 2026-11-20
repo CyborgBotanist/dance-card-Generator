@@ -110,17 +110,19 @@ public class DanceScheduler {
         return new ArrayList<>(cards.values());
     }
 
+
+
+    /*
+     * I need to remember that it is almost 100% gauranteed that the smaller group will be the leads.
+     * basically, the men must not have nay empty dances.
+     */
+
     /**
      * Makes a list of size circleSize that holds every dancer from smallerGroup,
      * with null (an empty spot) filling the remaining places, spread out evenly.
      *
      * Example: 3 follows in a circle of 6 gives [empty, A, empty, B, empty, C].
      */
-
-    /**
-     * I need to remember that it is almost 100% gauranteed that the smaller group will be the leads.
-     * basically, the men must not have nay empty dances.
-     * */
     private List<Dancer> buildInnerCircle(List<Dancer> smallerGroup, int circleSize) {
         List<Dancer> circle = new ArrayList<>();
         int placed = 0;
